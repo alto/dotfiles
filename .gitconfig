@@ -1,0 +1,14 @@
+[user]
+  name = Thorsten Böttger
+  email = boettger@mt7.de
+  user = alto
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+  b = branch
+  cp = cherry-pick
+[color]
+  ui = auto
+[push]
+  default = tracking

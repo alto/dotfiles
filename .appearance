@@ -1,0 +1,9 @@
+# colored grep
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='1;33'
+
+# colored ls
+export LSCOLORS='Gxfxcxdxdxegedabagacad'
+
+# the prompt
+export PS1='\u [\w]$(__git_ps1 " (%s)")$'

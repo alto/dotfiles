@@ -1,0 +1,2 @@
+# to allow rvm installation on Lion (http://blog.jeffdouglas.com/2011/08/01/ruby-1-9-2-install-errors-with-mac-os-x-lion-and-rvm/)
+export CC=/usr/bin/gcc-4.2
