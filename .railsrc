@@ -1,0 +1,66 @@
+# Rails Console specifics
+# log SQL statements
+if ENV.include?('RAILS_ENV')
+  if !Object.const_defined?('RAILS_DEFAULT_LOGGER')
+    require 'logger'
+    Object.const_set('RAILS_DEFAULT_LOGGER', Logger.new(STDOUT))
+  end
+
+  # def sql(query)
+  #   ActiveRecord::Base.connection.select_all(query)
+  # end
+
+  if ENV['RAILS_ENV'] == 'test'
+    require 'test/test_helper'
+  end
+
+# for rails 3
+elsif defined?(Rails) && !Rails.env.nil?
+
+  if Rails.logger
+    Rails.logger =Logger.new(STDOUT)
+    ActiveRecord::Base.logger = Rails.logger
+  end
+
+  if Rails.env == 'test'
+    require 'test/test_helper'
+  end
+
+  # Isn’t it nice to see the current project+environment in your prompt?
+  app_name = Rails.application.class.parent_name.downcase
+  app_env  = Rails.env[0...3]
+  IRB.conf[:PROMPT] ||= {}
+  IRB.conf[:PROMPT][:RAILS] = {
+    :PROMPT_I => "#{ app_name }(#{ app_env })> ",
+    :PROMPT_N => "#{ app_name }(#{ app_env })| ",
+    :PROMPT_C => "#{ app_name }(#{ app_env })| ",
+    :PROMPT_S => "#{ app_name }(#{ app_env })%l ",
+    :RETURN => "=> %s\n",
+    :AUTO_INDENT => true,
+  }
+  IRB.conf[:PROMPT_MODE] = :RAILS
+else
+  # nothing to do
+end
+
+# Per project histories
+history_file = File.join Dir.pwd, '.console_history'
+if !IRB.conf[:PROMPT][:RVM]
+  IRB.conf[:HISTORY_FILE] = history_file
+else # RVM workaround, code from ~/.rvm/scripts/irbrc.rb
+  # NOTE: messes up your ~/.irb-history
+  # consider editing the rvm script directly
+  if File.exists?(history_file)
+    lines = IO.readlines(history_file).collect { |line| line.chomp }
+    Readline::HISTORY.clear
+    Readline::HISTORY.push(*lines)
+  end
+
+  Kernel::at_exit do
+    maxhistsize = IRB.conf[:SAVE_HISTORY] || 100
+    history_file = File.join Dir.pwd, ".console_history"
+    lines = Readline::HISTORY.to_a.reverse.uniq.reverse
+    lines = lines[-maxhistsize, maxhistsize] if lines.compact.length > maxhistsize
+    File::open(history_file, "w+") { |io| io.puts lines.join("\n") }
+  end
+end
