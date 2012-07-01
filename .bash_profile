@@ -20,8 +20,8 @@ export PATH
 export GIT_HOSTING='git@git.domain.com'
 
 # Set my editor and git editor
-export EDITOR="/usr/bin/mate -w"
-export GIT_EDITOR='/usr/bin/mate -w'
+export EDITOR="/usr/bin/subl -w"
+export GIT_EDITOR='/usr/bin/subl -w'
 
 # Set the path nginx
 # export NGINX_PATH='/opt/nginx'
