@@ -5,5 +5,7 @@ alias cdi='cd ~/workspace/investapp'
 alias mdiff='git diff | mate'
 alias sdiff='git diff --staged | mate'
 
+alias r='ruby -I. -Itest'
+
 alias models='find ./app/models/ ./test/unit/ -name "*.rb" -exec egrep "(FIXME|TODO)" {} \; -print'
 alias controllers='find ./app/controllers/ ./app/views/ ./test/functional/ -name "*.rb" -exec egrep "(FIXME|TODO)" {} \; -print'
