@@ -9,3 +9,5 @@ alias r='ruby -I. -Itest'
 
 alias models='find ./app/models/ ./test/unit/ -name "*.rb" -exec egrep "(FIXME|TODO)" {} \; -print'
 alias controllers='find ./app/controllers/ ./app/views/ ./test/functional/ -name "*.rb" -exec egrep "(FIXME|TODO)" {} \; -print'
+
+alias be='bundle exec'
