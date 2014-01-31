@@ -8,6 +8,8 @@
   co = checkout
   b = branch
   cp = cherry-pick
+  graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%aN>%Creset'
+  lg = log --oneline --graph --decorate
 [color]
   ui = auto
 [push]
