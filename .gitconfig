@@ -10,8 +10,9 @@
   cp = cherry-pick
   graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%aN>%Creset'
   lg = log --oneline --graph --decorate
-  when = "for-each-ref --sort=-committerdate --format='%(refname:short) %(committerdate:short)'"
-	log1 = log --pretty=\"format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset\"
+  when = for-each-ref --sort=-committerdate --format='%(refname:short) %(committerdate:short)'
+  log1 = log --pretty=\"format:%C(yellow)%h%C(bold blue)%d%Creset %s %C(white) %an, %ar%Creset\"
+  l = log --pretty=\"format:%C(yellow)%h%C(bold blue)%d%Creset %s %C(white) %an, %ar%Creset\"
 [color]
   ui = auto
 [push]
